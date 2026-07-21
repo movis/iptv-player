@@ -346,7 +346,7 @@
                     // PROXY LOGIC: If image is HTTP, route it through a secure proxy for GitHub Pages
                     let secureLogoUrl = ch.logo;
                     if (secureLogoUrl && secureLogoUrl.startsWith('http://')) {
-                        secureLogoUrl = 'https://images.weserv.nl/?url=' + secureLogoUrl.replace('http://', '');
+                        secureLogoUrl = 'https://images.weserv.nl/?url=' + secureLogoUrl.replace('http://', '').replace('https://', '');
                     }
 
                     if (currentLayout === 'grid') {
@@ -397,18 +397,18 @@
             if (mpegtsPlayer) { mpegtsPlayer.pause(); mpegtsPlayer.unload(); mpegtsPlayer.detachMediaElement(); mpegtsPlayer.destroy(); mpegtsPlayer = null; }
             videoElement.removeAttribute('src'); videoElement.load();
 
-            // If on HTTPS (GitHub Pages), try forcing HTTPS for the video stream
+            // STREAM PROXY: If on HTTPS (GitHub Pages) and stream is HTTP, route through CORS proxy
             let finalUrl = url;
             if (window.location.protocol === 'https:' && finalUrl.startsWith('http://')) {
-                finalUrl = 'https://' + finalUrl.substring(7);
+                finalUrl = 'https://corsproxy.io/?url=' + encodeURIComponent(finalUrl);
             }
 
-            const isTs = finalUrl.match(/\.(ts|m3u8)(\?|&|$)/i);
+            const isTs = url.match(/\.(ts|m3u8)(\?|&|$)/i); // Check original URL for format
             if (isTs && mpegts.isSupported()) {
                 mpegtsPlayer = mpegts.createPlayer({ type: 'mpegts', isLive: true, url: finalUrl });
                 mpegtsPlayer.attachMediaElement(videoElement);
                 mpegtsPlayer.load(); mpegtsPlayer.play().catch(()=>{});
-                mpegtsPlayer.on(mpegts.Events.ERROR, () => setStatus('error', 'Stream blocked or offline. Allow Insecure Content in browser settings.'));
+                mpegtsPlayer.on(mpegts.Events.ERROR, () => setStatus('error', 'Stream blocked or offline.'));
                 mpegtsPlayer.on(mpegts.Events.PLAYING, () => setStatus('playing', 'Playing successfully'));
             } else {
                 videoElement.src = finalUrl;
