@@ -1,8 +1,4 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="BNT 1 FHD" tvg-logo="http://51.158.145.100/picons/logos/logos/154779.png" group-title="BULGARIA", BG| BNT 1 FHD
-http://atk97.online:80/play/live.php?mac=00:1A:79:4F:02:30&stream=2077051&extension=ts&play_token=PRA2IO5Yp1
-#EXTINF:-1 tvg-id="BNT 3 FHD" tvg-logo="http://51.158.145.100/picons/logos/logos/154782.png" group-title="BULGARIA", BG| BNT 3 FHD
-http://atk97.online:80/play/live.php?mac=00:1A:79:4F:02:30&stream=2077050&extension=ts&play_token=GhGOW04v79
 #EXTINF:-1 tvg-id="100 AUTOMOTO TV FHD" tvg-logo="http://51.158.145.100/picons/logos/logos/1517948.png" group-title="BULGARIA", BG| 100 AUTOMOTO TV FHD
 http://atk97.online:80/play/live.php?mac=00:1A:79:4F:02:30&stream=1517948&extension=ts&play_token=ybad6HxFqb
 #EXTINF:-1 tvg-id="24 KITCHEN" tvg-logo="http://51.158.145.100/picons/logos/logos/154757.png" group-title="BULGARIA", BG| 24 KITCHEN
